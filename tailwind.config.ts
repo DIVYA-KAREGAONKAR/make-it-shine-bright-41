@@ -59,6 +59,12 @@ export default {
           DEFAULT: "hsl(var(--mentor))",
           foreground: "hsl(var(--mentor-foreground))",
         },
+        nashik: {
+          DEFAULT: "hsl(var(--nashik))",
+          foreground: "hsl(var(--nashik-foreground))",
+          warm: "hsl(var(--nashik-warm))",
+          earth: "hsl(var(--nashik-earth))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

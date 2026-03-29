@@ -1,5 +1,6 @@
 import { Heart, MessageCircle, Share2 } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface PostCardProps {
   post: {
@@ -21,6 +22,16 @@ export function PostCard({ post }: PostCardProps) {
   const toggleLike = () => {
     setLiked(!liked);
     setLikeCount(liked ? likeCount - 1 : likeCount + 1);
+    if (!liked) toast.success("❤️ Liked!");
+  };
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.href);
+    toast.success("Link copied! 📋");
+  };
+
+  const handleComment = () => {
+    toast.info("Comments feature लवकरच!");
   };
 
   return (
@@ -45,11 +56,11 @@ export function PostCard({ post }: PostCardProps) {
           <Heart size={16} fill={liked ? "currentColor" : "none"} />
           <span>{likeCount}</span>
         </button>
-        <button className="flex items-center gap-1 text-caption hover:text-primary transition-colors">
+        <button onClick={handleComment} className="flex items-center gap-1 text-caption hover:text-primary transition-colors">
           <MessageCircle size={16} />
           <span>{post.comments}</span>
         </button>
-        <button className="flex items-center gap-1 text-caption hover:text-primary transition-colors">
+        <button onClick={handleShare} className="flex items-center gap-1 text-caption hover:text-primary transition-colors">
           <Share2 size={16} />
         </button>
       </div>
