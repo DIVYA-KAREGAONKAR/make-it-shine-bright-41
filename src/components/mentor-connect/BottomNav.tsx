@@ -1,14 +1,37 @@
+<<<<<<< HEAD
 import { Home, Search, Users, Briefcase, User, LayoutDashboard, MessageSquare, PlusCircle, MessagesSquare } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/lib/auth-context";
 import { useLanguage } from "@/lib/language-context";
 import { Logo } from "@/components/mentor-connect/Logo";
 import { LanguageToggle } from "@/components/mentor-connect/LanguageToggle";
+=======
+import { Home, Search, Users, Briefcase, User, LayoutDashboard, MessageSquare, PlusCircle } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "@/lib/auth-context";
+
+const studentTabs = [
+  { path: "/student/home", icon: Home, label: "Home" },
+  { path: "/student/explore", icon: Search, label: "Explore" },
+  { path: "/student/communities", icon: Users, label: "Communities" },
+  { path: "/student/opportunities", icon: Briefcase, label: "Jobs" },
+  { path: "/student/profile", icon: User, label: "Profile" },
+];
+
+const mentorTabs = [
+  { path: "/mentor/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+  { path: "/mentor/community", icon: MessageSquare, label: "Community" },
+  { path: "/mentor/post", icon: PlusCircle, label: "Post" },
+  { path: "/mentor/members", icon: Users, label: "Members" },
+  { path: "/mentor/profile", icon: User, label: "Profile" },
+];
+>>>>>>> main
 
 export function BottomNav() {
   const navigate = useNavigate();
   const location = useLocation();
   const { role } = useAuth();
+<<<<<<< HEAD
   const { t } = useLanguage();
 
   const studentTabs = [
@@ -26,6 +49,8 @@ export function BottomNav() {
     { path: "/messages", icon: MessagesSquare, label: t("nav.messages") },
     { path: "/mentor/profile", icon: User, label: t("nav.profile") },
   ];
+=======
+>>>>>>> main
 
   const tabs = role === "mentor" ? mentorTabs : studentTabs;
 
@@ -56,6 +81,7 @@ export function DesktopSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const { role } = useAuth();
+<<<<<<< HEAD
   const { t } = useLanguage();
 
   const studentTabs = [
@@ -75,24 +101,43 @@ export function DesktopSidebar() {
     { path: "/messages", icon: MessagesSquare, label: t("nav.messages") },
     { path: "/mentor/profile", icon: User, label: t("nav.profile") },
   ];
+=======
+>>>>>>> main
 
   const tabs = role === "mentor" ? mentorTabs : studentTabs;
 
   return (
     <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 w-64 bg-card border-r border-border flex-col z-50">
       <div className="p-6 border-b border-border">
+<<<<<<< HEAD
         <Logo size="md" variant={role === "mentor" ? "mentor" : "student"} />
         <p className="text-caption text-muted-foreground mt-1.5 ml-[52px]">🏔️ {t("nav.nashik")}</p>
       </div>
       <div className="px-3 py-3 border-b border-border">
         <LanguageToggle />
+=======
+        <div className="flex items-center gap-3">
+          <div className={`w-10 h-10 rounded-xl ${role === "mentor" ? "bg-mentor" : "bg-primary"} flex items-center justify-center`}>
+            <span className={`${role === "mentor" ? "text-mentor-foreground" : "text-primary-foreground"} font-bold text-body`}>M</span>
+          </div>
+          <div>
+            <span className="font-semibold text-body text-foreground block">MentorConnect</span>
+            <span className="text-caption text-muted-foreground">नाशिक</span>
+          </div>
+        </div>
+>>>>>>> main
       </div>
       <nav className="flex-1 py-4">
         {tabs.map((tab) => {
           const isActive = location.pathname.startsWith(tab.path);
           const Icon = tab.icon;
+<<<<<<< HEAD
           const activeClass = role === "mentor"
             ? "bg-mentor/10 text-mentor border-r-2 border-mentor"
+=======
+          const activeClass = role === "mentor" 
+            ? "bg-mentor/10 text-mentor border-r-2 border-mentor" 
+>>>>>>> main
             : "bg-primary/10 text-primary border-r-2 border-primary";
           return (
             <button
@@ -107,7 +152,11 @@ export function DesktopSidebar() {
         })}
       </nav>
       <div className="p-4 border-t border-border">
+<<<<<<< HEAD
         <p className="text-caption text-muted-foreground text-center">{t("made.in.nashik")}</p>
+=======
+        <p className="text-caption text-muted-foreground text-center">🏔️ Made with ❤️ in Nashik</p>
+>>>>>>> main
       </div>
     </aside>
   );

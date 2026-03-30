@@ -1,22 +1,39 @@
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import { useLanguage } from "@/lib/language-context";
 import { Community } from "@/lib/types";
 
 interface CommunityCardProps {
   community: Community;
+=======
+
+interface CommunityCardProps {
+  community: {
+    id: string;
+    name: string;
+    mentorName: string;
+    mentorAvatar: string;
+    members: number;
+    unread: number;
+  };
+>>>>>>> main
 }
 
 export function CommunityCard({ community }: CommunityCardProps) {
   const navigate = useNavigate();
+<<<<<<< HEAD
   const { getLocalized, t } = useLanguage();
 
   const mName = community.mentorName || { en: "Expert", mr: "तज्ज्ञ" };
   const mAvatar = community.mentorAvatar || community.image;
   const unreadCount = community.unread || 0;
+=======
+>>>>>>> main
 
   return (
     <div
       onClick={() => navigate(`/community/${community.id}`)}
+<<<<<<< HEAD
       className="flex items-center gap-4 p-4 bg-card rounded-2xl shadow-sm border border-border cursor-pointer hover:border-primary/50 hover:shadow-md transition-all duration-300 animate-fade-in group relative overflow-hidden"
     >
       <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -50,6 +67,20 @@ export function CommunityCard({ community }: CommunityCardProps) {
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </div>
       </div>
+=======
+      className="flex items-center gap-3 p-4 bg-card rounded-card shadow-card border border-border cursor-pointer hover:border-primary/30 transition-colors animate-fade-in"
+    >
+      <img src={community.mentorAvatar} alt={community.mentorName} className="w-12 h-12 rounded-full object-cover" />
+      <div className="flex-1 min-w-0">
+        <h4 className="font-semibold text-body text-foreground truncate">{community.name}</h4>
+        <p className="text-caption text-muted-foreground">by {community.mentorName} · {community.members} members</p>
+      </div>
+      {community.unread > 0 && (
+        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground text-caption flex items-center justify-center font-medium">
+          {community.unread}
+        </span>
+      )}
+>>>>>>> main
     </div>
   );
 }

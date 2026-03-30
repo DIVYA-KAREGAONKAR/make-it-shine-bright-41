@@ -1,13 +1,33 @@
+<<<<<<< HEAD
 import { createContext, useContext, useState, ReactNode, useEffect, useCallback } from "react";
 import { supabase } from "./supabase";
 import { Session, User as SupabaseUser } from "@supabase/supabase-js";
 
 import { Role, User } from "./types";
+=======
+import { createContext, useContext, useState, ReactNode } from "react";
+
+type Role = "student" | "mentor" | null;
+
+interface User {
+  name: string;
+  email: string;
+  role: Role;
+  avatar?: string;
+  industries: string[];
+  skills: string[];
+  goals?: string;
+  company?: string;
+  experience?: number;
+  guidance?: string;
+}
+>>>>>>> main
 
 interface AuthContextType {
   user: User | null;
   role: Role;
   setRole: (role: Role) => void;
+<<<<<<< HEAD
   logout: () => Promise<void>;
   isAuthenticated: boolean;
   isInitialized: boolean;
@@ -16,12 +36,18 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   signUp: (userData: Omit<User, "id">, password: string) => Promise<{ success: boolean; error?: string }>;
   updateUser: (data: Partial<User>) => Promise<void>;
+=======
+  login: (user: User) => void;
+  logout: () => void;
+  isAuthenticated: boolean;
+>>>>>>> main
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+<<<<<<< HEAD
   const [session, setSession] = useState<Session | null>(null);
   const [role, setRoleState] = useState<Role>(null);
   const [isInitialized, setIsInitialized] = useState(false);
@@ -212,6 +238,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       isAuthenticated: !!user, isInitialized, isNewUser, isLoading,
       signIn, signUp, updateUser 
     }}>
+=======
+  const [role, setRole] = useState<Role>(null);
+
+  const login = (userData: User) => {
+    setUser(userData);
+    setRole(userData.role);
+  };
+
+  const logout = () => {
+    setUser(null);
+    setRole(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, role, setRole, login, logout, isAuthenticated: !!user }}>
+>>>>>>> main
       {children}
     </AuthContext.Provider>
   );

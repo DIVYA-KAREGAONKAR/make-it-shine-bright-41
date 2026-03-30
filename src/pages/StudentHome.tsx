@@ -1,4 +1,5 @@
 import { useState } from "react";
+<<<<<<< HEAD
 import { Search, Bell, Sparkles, ArrowRight } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { useLanguage } from "@/lib/language-context";
@@ -6,11 +7,17 @@ import { useMentors } from "@/lib/mentors-context";
 import { useOpportunities } from "@/lib/opportunities-context";
 import { Community, Opportunity, Mentor } from "@/lib/types";
 import { communities, industries } from "@/lib/constants";
+=======
+import { Search, Bell } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
+import { mentors, communities, opportunities, industries } from "@/lib/mock-data";
+>>>>>>> main
 import { IndustryChip } from "@/components/mentor-connect/IndustryChip";
 import { MentorCard } from "@/components/mentor-connect/MentorCard";
 import { CommunityCard } from "@/components/mentor-connect/CommunityCard";
 import { OpportunityCard } from "@/components/mentor-connect/OpportunityCard";
 import { ResponsiveLayout } from "@/components/mentor-connect/ResponsiveLayout";
+<<<<<<< HEAD
 import { Logo } from "@/components/mentor-connect/Logo";
 import { LanguageToggle } from "@/components/mentor-connect/LanguageToggle";
 import { toast } from "sonner";
@@ -35,11 +42,29 @@ export default function StudentHome() {
     if (hour < 12) return t("home.greeting.morning") || "Good Morning";
     if (hour < 18) return t("home.greeting.afternoon") || "Good Afternoon";
     return t("home.greeting.evening") || "Good Evening";
+=======
+import { toast } from "sonner";
+
+export default function StudentHome() {
+  const { user } = useAuth();
+  const [selectedIndustry, setSelectedIndustry] = useState("All");
+
+  const filteredMentors = selectedIndustry === "All"
+    ? mentors
+    : mentors.filter((m) => m.industry === selectedIndustry);
+
+  const greeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "सुप्रभात";
+    if (hour < 18) return "शुभ दुपार";
+    return "शुभ संध्याकाळ";
+>>>>>>> main
   };
 
   return (
     <ResponsiveLayout>
       <div className="min-h-screen bg-background pb-20 lg:pb-8">
+<<<<<<< HEAD
         {/* Mobile Top Bar */}
         <div className="sticky top-0 bg-card/90 backdrop-blur-xl border-b border-border/50 z-40 px-4 py-3 lg:hidden shadow-sm">
           <div className="max-w-3xl mx-auto flex justify-between items-center">
@@ -58,11 +83,28 @@ export default function StudentHome() {
               >
                 <Bell size={18} />
                 <span className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-destructive border-2 border-card" />
+=======
+        {/* Top Bar */}
+        <div className="sticky top-0 bg-card/80 backdrop-blur-md border-b border-border z-40 px-4 py-3 lg:hidden">
+          <div className="max-w-3xl mx-auto flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-caption">M</span>
+              </div>
+              <span className="font-semibold text-body text-foreground">MentorConnect</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <button onClick={() => toast.info("Search येत आहे!")} className="text-muted-foreground hover:text-foreground transition-colors"><Search size={20} /></button>
+              <button onClick={() => toast.info("Notifications येत आहे!")} className="text-muted-foreground hover:text-foreground transition-colors relative">
+                <Bell size={20} />
+                <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-destructive" />
+>>>>>>> main
               </button>
             </div>
           </div>
         </div>
 
+<<<<<<< HEAD
         <div className="max-w-5xl mx-auto px-4 py-8 space-y-10 animate-fade-in">
           {/* Hero Greeting */}
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/10 via-background to-mentor/10 p-8 border border-primary/5">
@@ -172,6 +214,53 @@ export default function StudentHome() {
                 </div>
               )}
             </section>
+=======
+        <div className="max-w-3xl mx-auto px-4 py-6 space-y-8">
+          {/* Greeting */}
+          <div className="animate-fade-in">
+            <h1 className="text-h2 text-foreground">{greeting()}, {user?.name || "विद्यार्थी"} 🙏</h1>
+            <p className="text-body text-muted-foreground">Mentors शोधा आणि करिअर वाढवा.</p>
+          </div>
+
+          {/* Industry Filters */}
+          <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
+            <IndustryChip label="All" selected={selectedIndustry === "All"} onPress={() => setSelectedIndustry("All")} />
+            {industries.map((ind) => (
+              <IndustryChip key={ind} label={ind} selected={selectedIndustry === ind} onPress={() => setSelectedIndustry(ind)} />
+            ))}
+          </div>
+
+          {/* Mentors */}
+          <div>
+            <h2 className="text-h3 text-foreground mb-4">
+              {selectedIndustry === "All" ? "सर्व" : selectedIndustry} मधील Mentors
+            </h2>
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredMentors.map((mentor) => (
+                <MentorCard key={mentor.id} mentor={mentor} />
+              ))}
+            </div>
+          </div>
+
+          {/* Communities */}
+          <div>
+            <h2 className="text-h3 text-foreground mb-4">तुमच्या Communities</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+              {communities.slice(0, 3).map((c) => (
+                <CommunityCard key={c.id} community={c} />
+              ))}
+            </div>
+          </div>
+
+          {/* Opportunities */}
+          <div>
+            <h2 className="text-h3 text-foreground mb-4">नाशिक मधील संधी</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+              {opportunities.slice(0, 3).map((o) => (
+                <OpportunityCard key={o.id} opportunity={o} />
+              ))}
+            </div>
+>>>>>>> main
           </div>
         </div>
       </div>

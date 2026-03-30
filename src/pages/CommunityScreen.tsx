@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import { ArrowLeft, Users, Shield, Award, Info, Share2 } from "lucide-react";
 import { communities } from "@/lib/constants";
 import { useLanguage } from "@/lib/language-context";
+=======
+import { ArrowLeft, Users } from "lucide-react";
+import { communities } from "@/lib/mock-data";
+>>>>>>> main
 import { ChatSection } from "@/components/mentor-connect/ChatSection";
 import { SharedResourcesList } from "@/components/mentor-connect/SharedResourcesList";
 import { ResponsiveLayout } from "@/components/mentor-connect/ResponsiveLayout";
@@ -11,11 +16,15 @@ import { toast } from "sonner";
 export default function CommunityScreen() {
   const { id } = useParams();
   const navigate = useNavigate();
+<<<<<<< HEAD
   const { t, getLocalized } = useLanguage();
+=======
+>>>>>>> main
   const community = communities.find((c) => c.id === id);
   const [activeTab, setActiveTab] = useState("chat");
   const [joined, setJoined] = useState(true);
 
+<<<<<<< HEAD
   if (!community) return (
     <div className="min-h-screen flex flex-col items-center justify-center text-muted-foreground gap-4">
       <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
@@ -40,10 +49,21 @@ export default function CommunityScreen() {
     if (window.confirm(t("community.leaveConfirm") || "Are you sure you want to leave this community?")) {
       setJoined(false);
       toast.success(t("community.leftSuccess") || "Successfully left the community");
+=======
+  if (!community) return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Community सापडली नाही</div>;
+
+  const tabs = ["Chat", "Opportunities", "Members", "Resources"];
+
+  const handleLeave = () => {
+    if (window.confirm("Community सोडायची आहे का?")) {
+      setJoined(false);
+      toast.success("Community सोडली");
+>>>>>>> main
       navigate("/student/communities");
     }
   };
 
+<<<<<<< HEAD
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
     toast.success(t("post.linkCopied") || "Link copied! 📋");
@@ -112,12 +132,39 @@ export default function CommunityScreen() {
                   }`}
                 >
                   {tab.label}
+=======
+  return (
+    <ResponsiveLayout>
+      <div className="min-h-screen bg-background pb-20 lg:pb-0">
+        <div className="bg-card border-b border-border px-4 py-4">
+          <div className="max-w-3xl mx-auto">
+            <div className="flex items-center gap-3 mb-3">
+              <button onClick={() => navigate(-1)} className="text-muted-foreground hover:text-foreground"><ArrowLeft size={20} /></button>
+              <div className="flex-1">
+                <h1 className="text-h3 text-foreground">{community.name}</h1>
+                <div className="flex items-center gap-2 text-caption text-muted-foreground">
+                  <img src={community.mentorAvatar} alt="" className="w-5 h-5 rounded-full" />
+                  <span>{community.mentorName}</span>
+                  <span>·</span>
+                  <Users size={12} />
+                  <span>{community.members} members</span>
+                </div>
+              </div>
+              <button onClick={handleLeave} className="text-caption text-destructive font-medium">Leave</button>
+            </div>
+
+            <div className="flex border-b border-border -mx-4 px-4 overflow-x-auto scrollbar-hide">
+              {tabs.map((tab) => (
+                <button key={tab} onClick={() => setActiveTab(tab.toLowerCase())} className={`flex-shrink-0 px-4 py-3 text-body font-medium transition-colors whitespace-nowrap ${activeTab === tab.toLowerCase() ? "text-primary border-b-2 border-primary" : "text-muted-foreground"}`}>
+                  {tab}
+>>>>>>> main
                 </button>
               ))}
             </div>
           </div>
         </div>
 
+<<<<<<< HEAD
         {/* Content Section */}
         <div className="flex-1 flex flex-col max-w-5xl mx-auto w-full">
           <div className="flex-1 p-4 md:p-6">
@@ -161,6 +208,17 @@ export default function CommunityScreen() {
               </div>
             )}
           </div>
+=======
+        <div className="max-w-3xl mx-auto">
+          {activeTab === "chat" && <ChatSection />}
+          {activeTab === "opportunities" && <p className="text-body text-muted-foreground text-center py-8 px-4">या community मध्ये अजून opportunities पोस्ट नाहीत.</p>}
+          {activeTab === "members" && <p className="text-body text-muted-foreground text-center py-8 px-4">Member list लवकरच.</p>}
+          {activeTab === "resources" && (
+            <div className="px-4 py-6">
+              <SharedResourcesList />
+            </div>
+          )}
+>>>>>>> main
         </div>
       </div>
     </ResponsiveLayout>

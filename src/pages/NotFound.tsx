@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useLanguage } from "@/lib/language-context";
@@ -6,6 +7,13 @@ const NotFound = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useLanguage();
+=======
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
+const NotFound = () => {
+  const location = useLocation();
+>>>>>>> main
 
   useEffect(() => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
@@ -13,6 +21,7 @@ const NotFound = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted">
+<<<<<<< HEAD
       <div className="text-center p-6 bg-card rounded-card shadow-card border border-border">
         <h1 className="mb-4 text-6xl font-bold text-primary">404</h1>
         <p className="mb-6 text-xl text-muted-foreground font-medium">Oops! Page not found</p>
@@ -22,6 +31,14 @@ const NotFound = () => {
         >
           Return to Home
         </button>
+=======
+      <div className="text-center">
+        <h1 className="mb-4 text-4xl font-bold">404</h1>
+        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
+        <a href="/" className="text-primary underline hover:text-primary/90">
+          Return to Home
+        </a>
+>>>>>>> main
       </div>
     </div>
   );

@@ -113,6 +113,7 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+<<<<<<< HEAD
 
   .btn-base {
     @apply h-11 px-6 rounded-xl text-caption font-bold transition-all active:scale-95 flex items-center justify-center whitespace-nowrap gap-2;
@@ -129,4 +130,6 @@
   .btn-destructive {
     @apply btn-base border-2 border-destructive/20 text-destructive hover:bg-destructive/5 shadow-sm;
   }
+=======
+>>>>>>> main
 }
